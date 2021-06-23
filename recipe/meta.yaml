@@ -6,9 +6,9 @@ package:
 
 source:
   - url: https://data.iana.org/time-zones/releases/tzdata{{ version }}.tar.gz
-    sha256: 07ec42b737d0d3c6be9c337f8abb5f00554a0f9cc4fcf01a703d69403b6bb2b1
+    sha256: 39e7d2ba08c68cbaefc8de3227aab0dec2521be8042cf56855f7dc3a9fb14e08
   - url: https://data.iana.org/time-zones/releases/tzcode{{ version }}.tar.gz
-    sha256: 584666393a5424d13d27ec01183da17703273664742e049d4f62f62dab631775
+    sha256: eb46bfa124b5b6bd13d61a609bfde8351bd192894708d33aa06e5c1e255802d0
 
 build:
   number: 0
