@@ -1,4 +1,4 @@
-{% set version = "2020f" %}
+{% set version = "2021a" %}
 
 package:
   name: tzdata
@@ -55,7 +55,7 @@ about:
   home: https://www.iana.org/time-zones
   dev_url: https://github.com/eggert/tz
   doc_url: https://data.iana.org/time-zones/tz-link.html
-  license: LicenseRef-Public-Domain
+  license: LicenseRef-Public-Domain AND BSD-3-clause
   license_file: LICENSE
   summary: The Time Zone Database (called tz, tzdb or zoneinfo)
 
