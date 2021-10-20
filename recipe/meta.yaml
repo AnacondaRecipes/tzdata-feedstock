@@ -49,7 +49,18 @@ test:
           -exec head -c4 {} \; -printf \\n \
           | uniq
       )"
-      test "${heads}" = TZif
+      test "${heads}" = TZif  # [not (osx-64 or osx-arm64)]
+
+    # OSX does not have the '-printf' operator.
+    - |
+      heads="$(
+        find "${PREFIX}/share/zoneinfo" -type f \
+          \! -name \*.zi \! -name \*.tab \! -name leapseconds \
+          -exec head -c4 {} \; -print0 \
+          | uniq \
+          | cut -c1-4 \
+      )"
+      test "${heads}" = TZif  # [osx-64 or osx-arm64]
 
 about:
   home: https://www.iana.org/time-zones
