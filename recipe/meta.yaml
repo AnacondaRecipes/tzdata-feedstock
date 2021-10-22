@@ -1,4 +1,4 @@
-{% set version = "2021a" %}
+{% set version = "2021d" %}
 
 package:
   name: tzdata
@@ -6,9 +6,9 @@ package:
 
 source:
   - url: https://data.iana.org/time-zones/releases/tzdata{{ version }}.tar.gz
-    sha256: 121131918c3ae6dc5d40f0eb87563a2be920b71a76e2392c09519a5e4a666881
+    sha256: d7c188a2b33d4a3c25ee4a9fdc68c1ff462bfdb302cf41343d84ca5942dbddf6
   - url: https://data.iana.org/time-zones/releases/tzcode{{ version }}.tar.gz
-    sha256: cfeeea2a7745164f64bd9f6d76e47916f4ac820c4434493674adbbd4324329c5
+    sha256: ed0d02be79b54f4449ba1f239aeaf9315da490bf32f401d302dcbba4921f591d
 
 build:
   number: 0
@@ -49,13 +49,24 @@ test:
           -exec head -c4 {} \; -printf \\n \
           | uniq
       )"
-      test "${heads}" = TZif
+      test "${heads}" = TZif  # [not (osx-64 or osx-arm64)]
+
+    # OSX does not have the '-printf' operator.
+    - |
+      heads="$(
+        find "${PREFIX}/share/zoneinfo" -type f \
+          \! -name \*.zi \! -name \*.tab \! -name leapseconds \
+          -exec head -c4 {} \; -print0 \
+          | uniq \
+          | cut -c1-4 \
+      )"
+      test "${heads}" = TZif  # [osx-64 or osx-arm64]
 
 about:
   home: https://www.iana.org/time-zones
   dev_url: https://github.com/eggert/tz
   doc_url: https://data.iana.org/time-zones/tz-link.html
-  license: LicenseRef-Public-Domain AND BSD-3-clause
+  license: Public-Domain AND BSD-3-clause
   license_file: LICENSE
   summary: The Time Zone Database (called tz, tzdb or zoneinfo)
 
