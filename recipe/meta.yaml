@@ -28,12 +28,12 @@ requirements:
   run:
 
 test:
+  requires:
+    - python <3.10
+  files:
+    - test.sh
   commands:
-    - test -f "${PREFIX}/share/zoneinfo/leapseconds"
-    - test -f "${PREFIX}/share/zoneinfo/iso3166.tab"
-    - test -f "${PREFIX}/share/zoneinfo/zone1970.tab"
-    - test -f "${PREFIX}/share/zoneinfo/zone.tab"
-    - test -f "${PREFIX}/share/zoneinfo/tzdata.zi"
+    - chmod u+x test.sh && ./test.sh #[unix]
     # Make sure we only package zoneinfo and nothing else.
     - |
       dirs="$(
@@ -50,6 +50,9 @@ test:
           | uniq
       )"
       test "${heads}" = TZif
+
+
+
 
 about:
   home: https://www.iana.org/time-zones
