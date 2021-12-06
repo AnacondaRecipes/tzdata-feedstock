@@ -30,10 +30,7 @@ requirements:
 test:
   requires:
     - python <3.10
-  files:
-    - test.sh
   commands:
-    - chmod u+x test.sh && ./test.sh #[unix]
     # Make sure we only package zoneinfo and nothing else.
     - |
       dirs="$(
@@ -50,8 +47,6 @@ test:
           | uniq
       )"
       test "${heads}" = TZif
-
-
 
 
 about:
