@@ -13,6 +13,6 @@ exists() {
 	fi
 }
 
-for i in pkgs/tzdata-2021e-hda174b7_0/share/zoneinfo/{zone,iso3166,zone1970}.tab pkgs/tzdata-2021e-hda174b7_0/share/zoneinfo/leapseconds pkgs/tzdata-2021e-hda174b7_0/share/zoneinfo/tzdata.zi; do
+for i in share/zoneinfo/{zone,iso3166,zone1970}.tab share/zoneinfo/leapseconds share/zoneinfo/tzdata.zi; do
 	exists $i
 done
