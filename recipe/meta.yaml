@@ -29,13 +29,6 @@ requirements:
 
 test:
   commands:
-    # Make sure we only package zoneinfo and nothing else.
-    - |
-      dirs="$(
-        find "${PREFIX}" -mindepth 1 -maxdepth 2 \
-        \! -path "${PREFIX}/share" \! -path "${PREFIX}/conda-meta*"
-      )"
-      test "${dirs}" = "${PREFIX}/share/zoneinfo"
     # Make sure we only package timezone information files.
     - |
       heads="$(
@@ -44,7 +37,7 @@ test:
           -exec head -c4 {} \; -printf \\n \
           | uniq
       )"
-      test "${heads}" = TZif  # [not (osx-64 or osx-arm64)]
+      test "${heads}" = TZif  # [linux]
 
     # OSX does not have the '-printf' operator.
     - |

@@ -16,3 +16,7 @@ exists() {
 for i in share/zoneinfo/{zone,iso3166,zone1970}.tab share/zoneinfo/leapseconds share/zoneinfo/tzdata.zi; do
 	exists $i
 done
+
+# Make sure we only package zoneinfo and nothing else.
+dirs="$(find "${PREFIX}" -mindepth 1 -maxdepth 2 ! -path "${PREFIX}/share" ! -path "${PREFIX}/conda-meta*")"
+test "${dirs}" = "${PREFIX}/share/zoneinfo"
