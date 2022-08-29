@@ -36,7 +36,7 @@ test:
           \! -name \*.zi \! -name \*.tab \! -name leapseconds \
           -exec head -c4 {} \; -printf \\n \
           | uniq
-      )"
+      )"                      # [linux]
       test "${heads}" = TZif  # [linux]
 
     # OSX does not have the '-printf' operator.
@@ -47,7 +47,7 @@ test:
           -exec head -c4 {} \; -print0 \
           | uniq \
           | cut -c1-4 \
-      )"
+      )"                      # [osx-64 or osx-arm64]
       test "${heads}" = TZif  # [osx-64 or osx-arm64]
 
 
