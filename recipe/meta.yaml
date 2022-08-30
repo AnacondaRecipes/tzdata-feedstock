@@ -27,31 +27,6 @@ requirements:
   host:
   run:
 
-test:
-  commands:
-    # Make sure we only package timezone information files.
-    - |                                                          # [linux]
-      heads="$( \                                                # [linux]
-        find "${PREFIX}/share/zoneinfo" -type f \                # [linux]
-          \! -name \*.zi \! -name \*.tab \! -name leapseconds \  # [linux]
-          -exec head -c4 {} \; -printf \\n \                     # [linux]
-          | uniq \                                               # [linux]
-      )"                                                         # [linux]
-      test "${heads}" = TZif                                     # [linux]
-
-    # OSX does not have the '-printf' operator.
-    - |                                                           # [osx or arm64]
-      heads="$( \                                                 # [osx or arm64]
-        find "${PREFIX}/share/zoneinfo" -type f \                 # [osx or arm64]
-          \! -name \*.zi \! -name \*.tab \! -name leapseconds \   # [osx or arm64]
-          -exec head -c4 {} \; -print0 \                          # [osx or arm64]
-          | uniq \                                                # [osx or arm64]
-          | cut -c1-4 \                                           # [osx or arm64]
-      )"                                                          # [osx or arm64]
-      test "${heads}" = TZif                                      # [osx or arm64]
-      echo "This is heads: ${heads}"  # [osx-arm64]
-
-
 about:
   home: https://www.iana.org/time-zones
   dev_url: https://github.com/eggert/tz
