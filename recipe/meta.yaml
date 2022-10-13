@@ -12,58 +12,29 @@ source:
 
 build:
   number: 0
+  # This package needs to be noarch because it uses POSIX system APIs.
+  # There is no Windows port available and porting to Windows is not trivial.
+  # However, the compiled package can be used on Windows.
   noarch: generic
-  # The recipe assumes building on Linux, but we don't have "skip" active since
-  # the linter will complain with "`noarch` packages can't have selectors".
-  # skip: True  # [not linux]
+  skip: True  # [win]
   ignore_run_exports:
     - libgcc-ng
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - make  # [not win]
-    - m2-make  # [win]
+    - make
   host:
   run:
-
-test:
-  commands:
-    # Make sure we only package zoneinfo and nothing else.
-    - |
-      dirs="$(
-        find "${PREFIX}" -mindepth 1 -maxdepth 2 \
-        \! -path "${PREFIX}/share" \! -path "${PREFIX}/conda-meta*"
-      )"
-      test "${dirs}" = "${PREFIX}/share/zoneinfo"
-    # Make sure we only package timezone information files.
-    - |
-      heads="$(
-        find "${PREFIX}/share/zoneinfo" -type f \
-          \! -name \*.zi \! -name \*.tab \! -name leapseconds \
-          -exec head -c4 {} \; -printf \\n \
-          | uniq
-      )"
-      test "${heads}" = TZif  # [not (osx-64 or osx-arm64)]
-
-    # OSX does not have the '-printf' operator.
-    - |
-      heads="$(
-        find "${PREFIX}/share/zoneinfo" -type f \
-          \! -name \*.zi \! -name \*.tab \! -name leapseconds \
-          -exec head -c4 {} \; -print0 \
-          | uniq \
-          | cut -c1-4 \
-      )"
-      test "${heads}" = TZif  # [osx-64 or osx-arm64]
-
 
 about:
   home: https://www.iana.org/time-zones
   dev_url: https://github.com/eggert/tz
   doc_url: https://data.iana.org/time-zones/tz-link.html
-  license: Public-Domain AND BSD-3-clause
+  license: CC-PDDC OR BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE
+  license_url: https://github.com/eggert/tz/blob/main/LICENSE
   summary: The Time Zone Database (called tz, tzdb or zoneinfo)
 
   description: |
