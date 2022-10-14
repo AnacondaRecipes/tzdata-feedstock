@@ -14,8 +14,9 @@ build:
   number: 0
   noarch: generic
   # This package needs to be noarch because it uses POSIX system APIs.
+  # The Windows build will be skipped when built to avoid Prefect failures.
   # There is no Windows port available and porting to Windows is not trivial.
-  # The Windows build will be skipped when built.
+
   # However, the compiled package can be used on Windows.
   skip: True  # [win]
   ignore_run_exports:
