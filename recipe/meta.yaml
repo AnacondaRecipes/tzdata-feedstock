@@ -17,7 +17,7 @@ build:
   # the linter will complain with "`noarch` packages can't have selectors".
   #  This package will skip windows builds which is acceptable
   # considering it is a noarch package
-  # skip: True  # [not linux]
+  skip: True  # [win]
   ignore_run_exports:
     - libgcc-ng
 
