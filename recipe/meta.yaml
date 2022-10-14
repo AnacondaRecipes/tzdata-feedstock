@@ -26,8 +26,6 @@ requirements:
     - {{ compiler('c') }}
     - make  # [not win]
     - m2-make  # [win]
-    - setuptools
-    - wheel
   host:
   run:
 
