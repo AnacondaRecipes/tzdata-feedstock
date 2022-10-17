@@ -1,4 +1,4 @@
-{% set version = "2022c" %}
+{% set version = "2022e" %}
 
 package:
   name: tzdata
@@ -6,16 +6,18 @@ package:
 
 source:
   - url: https://data.iana.org/time-zones/releases/tzdata{{ version }}.tar.gz
-    sha256: 6974f4e348bf2323274b56dff9e7500247e3159eaa4b485dfa0cd66e75c14bfe
+    sha256: 8de4c2686dce3d1aae9030719e6814931c216a2d5e891ec3d332e6f6516aeccd
   - url: https://data.iana.org/time-zones/releases/tzcode{{ version }}.tar.gz
-    sha256: 3e7ce1f3620cc0481907c7e074d69910793285bffe0ca331ef1a6d1ae3ea90cc
+    sha256: d40280253980e89168e6be4275a852bf9521524d47684de3135b9a5ca387710b
 
 build:
   number: 0
-  # This package needs to be noarch because it uses POSIX system APIs.
-  # There is no Windows port available and porting to Windows is not trivial.
-  # However, the compiled package can be used on Windows.
   noarch: generic
+  # This package needs to be noarch because it uses POSIX system APIs.
+  # The Windows build will be skipped when built to avoid Prefect failures.
+  # There is no Windows port available and porting to Windows is not trivial.
+
+  # However, the compiled package can be used on Windows.
   skip: True  # [win]
   ignore_run_exports:
     - libgcc-ng
@@ -32,7 +34,6 @@ about:
   dev_url: https://github.com/eggert/tz
   doc_url: https://data.iana.org/time-zones/tz-link.html
   license: CC-PDDC OR BSD-3-Clause
-  license_family: BSD
   license_file: LICENSE
   license_url: https://github.com/eggert/tz/blob/main/LICENSE
   summary: The Time Zone Database (called tz, tzdb or zoneinfo)
