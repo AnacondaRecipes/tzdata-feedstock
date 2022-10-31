@@ -18,7 +18,7 @@ build:
   # There is no Windows port available and porting to Windows is not trivial.
 
   # However, the compiled package can be used on Windows.
-  skip: True  # [win]
+  skip: True  # [not linux-64]
   ignore_run_exports:
     - libgcc-ng
 
