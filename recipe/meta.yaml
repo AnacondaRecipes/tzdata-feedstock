@@ -38,7 +38,7 @@ about:
   dev_url: https://github.com/eggert/tz
   doc_url: https://data.iana.org/time-zones/tz-link.html
   license: CC-PDDC OR BSD-3-Clause
-  license_file: LICENSE
+  license_family: BSD
   license_url: https://github.com/eggert/tz/blob/main/LICENSE
   summary: The Time Zone Database (called tz, tzdb or zoneinfo)
 
