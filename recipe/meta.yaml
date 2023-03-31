@@ -25,13 +25,14 @@ build:
   # The recipe assumes building on Linux, but we don't have "skip" active since
   # the linter will complain with "`noarch` packages can't have selectors".
   # using skip will cause a blank `linux-64` build folder in zeus
-  skip: True  # [not (linux)]
+  skip: True  # [(win64 and win and osx and osx-arm64)]
   ignore_run_exports:
     - libgcc-ng
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - sysroot_linux-64 2.17  # [linux64]
     - make
   host:
   run:
