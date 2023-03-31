@@ -21,11 +21,7 @@ build:
   # compatible with macOS.
   # Since we are using using a noarch build, we can
   # simply focus linux as our main build
-
-  # The recipe assumes building on Linux, but we don't have "skip" active since
-  # the linter will complain with "`noarch` packages can't have selectors".
-  # using skip will cause a blank `linux-64` build folder in zeus
-  skip: True  # [(win64 and win and osx and osx-arm64)]
+  skip: True  # [not (linux and x86_64)]
   ignore_run_exports:
     - libgcc-ng
 
