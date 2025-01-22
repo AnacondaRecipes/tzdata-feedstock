@@ -1,4 +1,4 @@
-{% set version = "2025b" %}
+{% set version = "2025a" %}
 
 package:
   name: tzdata
