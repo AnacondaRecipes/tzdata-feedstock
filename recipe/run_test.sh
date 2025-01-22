@@ -22,6 +22,10 @@ dirs="$(find "${PREFIX}" -mindepth 1 -maxdepth 2 ! -path "${PREFIX}/share" ! -pa
 test "${dirs}" = "${PREFIX}/share/zoneinfo"
 
 # Make sure we only package timezone information files.
-heads="$(find "${PREFIX}/share/zoneinfo" -type f ! -name "*.zi" ! -name "*.tab" ! -name leapseconds ! -name leap-seconds.list -exec sh -c 'head -c4 $1 && echo' sh {} \; uniq)"
-
+heads="$(
+        find "${PREFIX}/share/zoneinfo" -type f \
+          \! -name \*.zi \! -name \*.tab \! -name leapseconds \! -name leap-seconds.list \
+          -exec sh -c 'head -c4 $1 && echo' sh {} \; \
+          | uniq
+      )"
 test "${heads}" = TZif
