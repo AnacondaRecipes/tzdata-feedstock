@@ -13,7 +13,7 @@ exists() {
 	fi
 }
 
-for i in share/zoneinfo/{zone,iso3166,zone1970}.tab share/zoneinfo/leapseconds share/zoneinfo/tzdata.zi; do
+for i in share/zoneinfo/{zone,iso3166,zone1970}.tab share/zoneinfo/leapseconds share/zoneinfo/leap-seconds.list share/zoneinfo/tzdata.zi; do
 	exists $i
 done
 
