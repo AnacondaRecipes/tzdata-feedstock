@@ -13,7 +13,7 @@ exists() {
 	fi
 }
 
-for i in share/zoneinfo/{zone,iso3166,zone1970}.tab share/zoneinfo/leapseconds share/zoneinfo/tzdata.zi; do
+for i in share/zoneinfo/{zone,iso3166,zone1970}.tab share/zoneinfo/leapseconds share/zoneinfo/leap-seconds.list share/zoneinfo/tzdata.zi; do
 	exists $i
 done
 
@@ -22,10 +22,10 @@ dirs="$(find "${PREFIX}" -mindepth 1 -maxdepth 2 ! -path "${PREFIX}/share" ! -pa
 test "${dirs}" = "${PREFIX}/share/zoneinfo"
 
 # Make sure we only package timezone information files.
-if [ `uname` == 'Darwin' ]; then
-  # OSX does not have the '-printf' operator.
-  heads="$(find "${PREFIX}/share/zoneinfo" -type f ! -name "*.zi" ! -name "*.tab" ! -name leapseconds -exec head -c4 {} ';' -print0 | uniq | cut -c1-4)"
-else
-  heads="$(find "${PREFIX}/share/zoneinfo" -type f ! -name "*.zi" ! -name "*.tab" ! -name leapseconds -exec head -c4 {} ';' -printf \\n | uniq)"
-fi
+heads="$(
+        find "${PREFIX}/share/zoneinfo" -type f \
+          \! -name \*.zi \! -name \*.tab \! -name leapseconds \! -name leap-seconds.list \
+          -exec sh -c 'head -c4 $1 && echo' sh {} \; \
+          | uniq
+      )"
 test "${heads}" = TZif
