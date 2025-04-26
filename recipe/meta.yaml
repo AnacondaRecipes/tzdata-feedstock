@@ -22,7 +22,7 @@ build:
   # Since we are using using a noarch build, we can
   # simply focus linux as our main build
 
-  skip: True  # [not (linux and x86_64)]
+#  skip: True  # [not (linux and )]
   ignore_run_exports:
     - libgcc-ng
 
