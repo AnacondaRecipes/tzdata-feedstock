@@ -12,7 +12,7 @@ source:
 
 build:
   number: 0
-  noarch: generic
+  noarch: python
   # This package needs to be noarch because it uses POSIX system APIs.
   # The Windows build will be skipped when built to avoid Prefect failures.
   # There is no Windows port available and porting to Windows is not trivial.
