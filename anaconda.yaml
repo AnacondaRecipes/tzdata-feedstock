@@ -1,0 +1,5 @@
+anaconda_config_version: 1
+upstream_sources:
+  - webpage:
+      url: https://data.iana.org/time-zones/releases/tzdata{}.tar.gz
+      regex: releases\/tzdata([\d.]+)\.tar\.gz
