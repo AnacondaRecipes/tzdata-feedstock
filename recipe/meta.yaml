@@ -1,4 +1,4 @@
-{% set version = "2026a" %}
+{% set version = "2026b" %}
 
 package:
   name: tzdata
@@ -6,9 +6,9 @@ package:
 
 source:
   - url: https://data.iana.org/time-zones/releases/tzdata{{ version }}.tar.gz
-    sha256: 77b541725937bb53bd92bd484c0b43bec8545e2d3431ee01f04ef8f2203ba2b7
+    sha256: 114543d9f19a6bfeb5bca43686aea173d38755a3db1f2eec112647ae92c6f544
   - url: https://data.iana.org/time-zones/releases/tzcode{{ version }}.tar.gz
-    sha256: f80a17a2eddd2b54041f9c98d75b0aa8038b016d7c5de72892a146d9938740e1
+    sha256: 37e9ed8427f5d3521c22fc58e293cbfb043d70eedf1003870b33f363f61ca344
 
 build:
   number: 0
@@ -20,7 +20,7 @@ build:
   # Tzdata is utilizing system header files which is not compatible with macOS.
   # However We build on osx because sysroot_linux-<arch> depends on tzdata.
   # Since this package is data-only, we don't want any of the run-exports.
-  skip: True  # [not osx]
+  skip: true  # [not osx]
   ignore_run_exports_from:
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
@@ -43,7 +43,6 @@ about:
   license_file: LICENSE
   license_family: BSD
   summary: The Time Zone Database (called tz, tzdb or zoneinfo)
-
   description: |
     The Time Zone Database (called tz, tzdb or zoneinfo) contains code and
     data that represent the history of local time for many representative
