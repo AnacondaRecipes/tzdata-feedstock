@@ -1,6 +1,5 @@
 {% set version = "2026b" %}
 
-# Test commands are placed in run_test.sh
 package:
   name: tzdata
   version: {{ version }}
@@ -34,6 +33,8 @@ requirements:
   host:
   run:
 
+# Test commands are placed in run_test.sh
+
 about:
   home: https://www.iana.org/time-zones
   dev_url: https://github.com/eggert/tz
@@ -48,8 +49,6 @@ about:
     locations around the globe.  It is updated periodically to reflect
     changes made by political bodies to time zone boundaries, UTC offsets,
     and daylight-saving rules.
-
-
 
 extra:
   recipe-maintainers:
